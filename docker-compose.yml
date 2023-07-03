@@ -26,8 +26,8 @@ services:
       # - ./printer.cfg:/home/klippy/.config/printer.cfg
     # mount serial device - take care to grant sufficient permissions to the device: <host_dev>:<container_dev>
     # put <container_dev> into your printer.cfg
-    devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
+    # devices:
+      # - /dev/ttyUSB0:/dev/ttyUSB0
 
   ##################################################################
   # Example config for a second printer on a different serial port
@@ -60,15 +60,32 @@ services:
   #     - /dev/ttyACM0:/dev/ttyACM0
 
 
-  fluidd:
-    image: dimalo/fluidd
+  # fluidd:
+  #   image: dimalo/fluidd
     # build:
     #   dockerfile: Dockerfile
     #   context: frontend
-    restart: unless-stopped
-    container_name: fluidd
+    # restart: unless-stopped
+    # container_name: fluidd
+    # ports:
+    #   - 8010:80
+    # depends_on: 
+    #   - klipper
+      # - klipper_another_printer
+    # links:
+    #   - klipper:klipper
+      # - klipper_another_printer:klipper_another_printer
+
+  mainsail:
+    image: dimalo/mainsail
+    build:
+      dockerfile: Dockerfile
+      context: frontend
+      args:
+        FRONTEND_ZIP_URL: https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip
+    container_name: mainsail
     ports:
-      - 8010:80
+      - 8011:80
     depends_on: 
       - klipper
       # - klipper_another_printer
@@ -76,24 +93,8 @@ services:
       - klipper:klipper
       # - klipper_another_printer:klipper_another_printer
 
-  # mainsail:
-  #   image: dimalo/mainsail
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: frontend
-  #     args:
-  #       FRONTEND_ZIP_URL: https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip
-  #   container_name: mainsail
-  #   ports:
-  #     - 8011:80
-  #   depends_on: 
-  #     - klipper
-  #     # - klipper_another_printer
-  #   links:
-  #     - klipper:klipper
-  #     # - klipper_another_printer:klipper_another_printer
-
 volumes: 
   gcode_files:
+  config:
   moonraker_data:
 

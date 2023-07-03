@@ -1,0 +1,49 @@
+[server]
+host = 0.0.0.0
+port = 7126
+klippy_uds_address = /home/mitch/test_data/comms/klippy.sock
+ssl_port = 7130
+
+[authorization]
+trusted_clients = 
+	0.0.0.0/0
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.20.0.6
+	172.16.0.0/12
+	192.168.1.0/24
+	FE80::/10
+	::1/128
+cors_domains = 
+	http://192.168.1.7:8080
+	https://192.168.1.7:8080
+	http://*
+	https://*
+	https://klipper.omnitk.duckdns.org
+	http://172.20.0.6
+	https://172.20.0.6
+	http://*.omninet.lan
+	https://*.omninet.lan
+	http://klipper.omnitk.duckdns.org
+	http://*.lan
+	http://*.local
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	https://app.fluidd.xyz
+	http://app.fluidd.xyz
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[power Ender_power]
+type = homeassistant
+address = 192.168.1.7
+port = 8123
+device = switch.security_display
+token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIwZjRhMjBjZWQ3MDA0OGExODUxOWJlZTA3ZjA2Y2IzOSIsImlhdCI6MTY1MjYyMDIzMSwiZXhwIjoxOTY3OTgwMjMxfQ.at1QRwmBbs00qZE5SFdviAwU3Jw_BFSc2DUMn-jMlNY
+domain = switch
+
